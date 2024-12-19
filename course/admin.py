@@ -1,5 +1,18 @@
 from django.contrib import admin
+from django.db import models
 from course.models import Course
+from course.models import Subject
+
 
 # Register your models here.
-admin.site.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ['title', 'slug']
+
+
+class SubjectAdmin(admin.ModelAdmin):
+    list_display = ['title', 'course']
+    list_filter = ['course']
+
+
+admin.site.register(Course, CourseAdmin)
+admin.site.register(Subject, SubjectAdmin)
